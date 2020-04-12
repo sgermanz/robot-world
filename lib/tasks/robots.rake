@@ -4,11 +4,31 @@ namespace :robots do
   task builder: :environment do
     require "#{Rails.root}/lib/robots/builder"
     require "#{Rails.root}/lib/robots/guard"
+    
     guard = Guard.new
     builder = Builder.new
     builder.setGuard (guard)
-
+    
     builder.build
+  end
+
+  desc "Guard Robot"
+  task guard: :environment do
+    require "#{Rails.root}/lib/robots/builder"
+    require "#{Rails.root}/lib/robots/guard"
+
+    guard = Guard.new
+    guard.moveToStore
+  end
+
+  desc "Buyer Robot"
+  task buyer: :environment do
+    require "#{Rails.root}/lib/robots/builder"
+    require "#{Rails.root}/lib/robots/guard"
+    require "#{Rails.root}/lib/robots/buyer"
+
+    buyer = Buyer.new
+    buyer.buy
   end
 
   desc "Initialize DB"

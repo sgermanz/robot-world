@@ -20,9 +20,22 @@
 # Learn more: http://github.com/javan/whenever
 # adds ">> /dev/null 2>&1" to all commands
 set :output, {:error => './log/robot-log/error.log', :standard => './log/robot-log/cron.log'}
-# every 1.minute do
-#     rake "robots:builder"
-# end
+every 1.minute do
+    rake "robots:builder"
+end
+
+every 30.minute do
+    rake "robots:guard"
+end
+
+every 1.minute do
+    configuration = JSON.parse StoreConfiguration.all.first.configuration
+    schedule = configuration.buyer_schedule
+    if !schedule.nil? and Time.current.min%schedule==0
+        rake "robots:buyer"
+    end
+end
+
 every 1.day, at: '0:00 am' do
     puts "initialize db"
     rake "robots:initialize"
