@@ -36,6 +36,14 @@ every 1.minute do
     end
 end
 
+every 1.minute do
+    configuration = JSON.parse StoreConfiguration.all.first.configuration
+    schedule = configuration.buyer_schedule
+    if !schedule.nil? and Time.current.min%schedule==0
+        rake "robots:changer"
+    end
+end
+
 every 1.day, at: '0:00 am' do
     puts "initialize db"
     rake "robots:initialize"

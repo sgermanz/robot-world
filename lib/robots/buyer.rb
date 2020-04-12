@@ -13,7 +13,9 @@ class Buyer
     end
     def change
         order = Order.getRandomOrder
-        if order.changes_amount < 2
+        configuration = JSON.parse StoreConfiguration.all.first.configuration
+        maximun_changes = configuration.maximun_changes
+        if order.changes_amount < maximun_changes
             OrderChange.create(order_id: order.id)
             order.update(changes_amount: order.changes_amount + 1)
             order.store_stock.update("status": StoreStock.getReturnedStatus)

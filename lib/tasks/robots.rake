@@ -14,7 +14,6 @@ namespace :robots do
 
   desc "Guard Robot"
   task guard: :environment do
-    require "#{Rails.root}/lib/robots/builder"
     require "#{Rails.root}/lib/robots/guard"
 
     guard = Guard.new
@@ -23,12 +22,18 @@ namespace :robots do
 
   desc "Buyer Robot"
   task buyer: :environment do
-    require "#{Rails.root}/lib/robots/builder"
-    require "#{Rails.root}/lib/robots/guard"
     require "#{Rails.root}/lib/robots/buyer"
 
     buyer = Buyer.new
     buyer.buy
+  end
+
+  desc "Changer Robot"
+  task changer: :environment do
+    require "#{Rails.root}/lib/robots/buyer"
+
+    buyer = Buyer.new
+    buyer.change
   end
 
   desc "Initialize DB"
