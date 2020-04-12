@@ -1,6 +1,8 @@
 class Car < ApplicationRecord
   has_one :computer
   belongs_to :car_model
+  has_many :warehouse_stock
+  has_many :store_stock
 
   # Lo correcto seria que cada auto vaya pasando secuencialmente por una linea de ensable atras de otro 
 
