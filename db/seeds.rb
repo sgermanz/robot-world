@@ -61,3 +61,14 @@ carModels = CarModel.create(
     ]
 )
 
+storeConfiguration = {
+    buyer_schedule: 10,
+    maximun_changes: 1,
+    min_stock: Hash.new
+}
+
+carModels.each do |carModel|
+    storeConfiguration[:min_stock][carModel.id] = (1..100).to_a.sample
+end
+
+storeConfigurations = StoreConfiguration.create(configuration: storeConfiguration.to_json)

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :store_configurations
   resources :orders
   resources :order_changes
   resources :store_stocks
