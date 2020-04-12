@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :store_stocks
+  resources :warehouse_stocks
   resources :cars
   resources :computers
   resources :car_models

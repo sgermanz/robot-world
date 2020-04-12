@@ -20,4 +20,11 @@ class Guard
     def onCarBuilt(car)
         check(car)
     end
+    def moveToStore
+        items = WarehouseStock.where(status: "new")
+        items.each do |item|
+            item.update(status: WarehouseStock.getMovedStatus)
+            StoreStock.create(car_id: item.car_id, status: StoreStock.getNewStatus)
+        end
+    end
 end
