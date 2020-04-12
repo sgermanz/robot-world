@@ -1,4 +1,3 @@
-require './lib/robots/builder.rb'
 namespace :robots do
   desc "Builder Robot"
   task builder: :environment do
@@ -22,20 +21,27 @@ namespace :robots do
 
   desc "Buyer Robot"
   task buyer: :environment do
-    require "#{Rails.root}/lib/robots/buyer"
+    configuration = JSON.parse StoreConfiguration.all.first.configuration
+    schedule = configuration[:buyer_schedule]
+    if !schedule.nil? and Time.current.min%schedule==0
+      require "#{Rails.root}/lib/robots/buyer"
 
-    buyer = Buyer.new
-    buyer.buy
+      buyer = Buyer.new
+      buyer.buy
+    end
   end
 
   desc "Changer Robot"
   task changer: :environment do
-    require "#{Rails.root}/lib/robots/buyer"
+    configuration = JSON.parse StoreConfiguration.all.first.configuration
+    schedule = configuration[:buyer_schedule]
+    if !schedule.nil? and Time.current.min%schedule==0
+      require "#{Rails.root}/lib/robots/buyer"
 
-    buyer = Buyer.new
-    buyer.change
+      buyer = Buyer.new
+      buyer.change
+    end
   end
-
   desc "Initialize DB"
   task initialize: :environment do
     system("rails db:drop")
