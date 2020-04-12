@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2020_04_12_091323) do
     t.index ["car_id"], name: "index_computers_on_car_id"
   end
 
+  create_table "order_changes", force: :cascade do |t|
+    t.bigint "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_changes_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "changes_amount"
     t.bigint "store_stock_id"

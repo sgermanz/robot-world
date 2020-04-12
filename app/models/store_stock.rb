@@ -11,7 +11,7 @@ class StoreStock < ApplicationRecord
         return "returned"
     end
 
-    def self.getRandomItem
+    def self.getRandomItemToBuy
         self.where(status: getNewStatus).or(self.where(status: getReturnedStatus)).sample
     end
 end
