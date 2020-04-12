@@ -11,4 +11,11 @@ namespace :robots do
     builder.build
   end
 
+  desc "Initialize DB"
+  task initialize: :environment do
+    system("rails db:drop")
+    system("rails db:create")
+    system("rails db:migrate")
+    system("rails db:seed")
+  end
 end
