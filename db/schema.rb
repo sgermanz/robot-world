@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_032039) do
+ActiveRecord::Schema.define(version: 2020_04_08_031838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,55 +19,26 @@ ActiveRecord::Schema.define(version: 2020_04_08_032039) do
     t.string "name"
     t.decimal "cost"
     t.decimal "price"
-    t.integer "minStock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cars", force: :cascade do |t|
     t.integer "year"
-    t.bigint "computer_id", null: false
     t.boolean "completed"
     t.string "assembly_stage"
-    t.bigint "car_model_id", null: false
+    t.bigint "car_model_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["car_model_id"], name: "index_cars_on_car_model_id"
-    t.index ["computer_id"], name: "index_cars_on_computer_id"
   end
 
   create_table "computers", force: :cascade do |t|
     t.jsonb "status"
+    t.bigint "car_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["car_id"], name: "index_computers_on_car_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.bigint "car_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["car_id"], name: "index_orders_on_car_id"
-  end
-
-  create_table "stores", force: :cascade do |t|
-    t.bigint "car_model_id", null: false
-    t.integer "stock"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["car_model_id"], name: "index_stores_on_car_model_id"
-  end
-
-  create_table "warehouses", force: :cascade do |t|
-    t.bigint "car_model_id", null: false
-    t.integer "stock"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["car_model_id"], name: "index_warehouses_on_car_model_id"
-  end
-
-  add_foreign_key "cars", "car_models"
-  add_foreign_key "cars", "computers"
-  add_foreign_key "orders", "cars"
-  add_foreign_key "stores", "car_models"
-  add_foreign_key "warehouses", "car_models"
 end

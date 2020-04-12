@@ -1,10 +1,11 @@
 class Builder
     @guard
     def build
-        puts "I'm building"
+        car = Car.createRandomCar
+        puts car.car_model.name
+        puts car.year
         if !@guard.nil?
-            puts "there's a guard"
-            @guard.notify('some car') 
+            @guard.onCarBuilt(car) 
         end
     end
     def setGuard (aGuard)
