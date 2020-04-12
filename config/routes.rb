@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :orders
-  resources :stores
-  resources :warehouses
   resources :cars
   resources :computers
   resources :car_models
