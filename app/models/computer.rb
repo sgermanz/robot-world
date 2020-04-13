@@ -3,22 +3,30 @@ class Computer < ApplicationRecord
 
   def setBasicStructure
     status = {
-      wheel1: [true, false].sample,
-      wheel2: [true, false].sample,
-      wheel3: [true, false].sample,
-      wheel4: [true, false].sample,
-      seat1: [true, false].sample,
-      seat2: [true, false].sample,
-      chassis: [true, false].sample,
-      computer: [true, false].sample
+      wheel1: self.defects,
+      wheel2: self.defects,
+      wheel3: self.defects,
+      wheel4: self.defects,
+      seat1: self.defects,
+      seat2: self.defects,
+      chassis: self.defects,
+      computer: self.defects
     }
     self.status = status.to_json
     self.save
   end
   def setElectronicDevices
     status = JSON.parse self.status
-    status["laser"] = [true, false].sample
+    status["laser"] = self.defects
     self.status = status.to_json
     self.save
+  end
+  def defects
+    defects = Array.new
+    19.times do
+      defects.push(true)
+    end
+    defects.push(false)
+    return defects.sample
   end
 end
