@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Computer, type: :model do
+RSpec.describe Builder, type: :model do
     it 'should build 10 cars' do
         require "#{Rails.root}/lib/robots/builder"
         require "#{Rails.root}/lib/robots/guard"
