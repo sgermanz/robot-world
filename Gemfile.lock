@@ -182,6 +182,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.2)
   rspec
+  rspec-mocks
   rspec-rails (~> 4.0)
   spring
   spring-watcher-listen (~> 2.0.0)
