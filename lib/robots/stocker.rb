@@ -1,4 +1,7 @@
 class Stocker
+    def logger
+        @@logger ||= Logger.new("#{Rails.root}/log/robots.log")
+    end
     def onBuy
         validate
     end
@@ -13,6 +16,7 @@ class Stocker
             min_stock = min_stocks[model_id]
             current_stock = modelStocks[carModel.id]
             if  current_stock < min_stock
+                logger.info "STOCKER: model to stock " + carModel.name
                 to_stock = min_stock - current_stock
                 stock(model_id, to_stock)
             end
