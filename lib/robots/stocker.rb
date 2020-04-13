@@ -19,7 +19,7 @@ class Stocker
         end
     end
     def stock(model_id, to_stock)
-        items = StoreStock.where(status: StoreStock.getNewStatus).or(StoreStock.where(status: StoreStock.getReturnedStatus)).where(car_id: Car.select("id").where(car_model_id: model_id)).take(to_stock)
+        items = WarehouseStock.where(status: WarehouseStock.getNewStatus).where(car_id: Car.select("id").where(car_model_id: model_id)).take(to_stock)
         items.each do |item|
             item.update(status: WarehouseStock.getMovedStatus)
             StoreStock.create(car_id: item.car_id, status: StoreStock.getNewStatus)
