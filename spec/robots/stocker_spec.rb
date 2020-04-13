@@ -20,14 +20,18 @@ RSpec.describe Stocker, type: :model do
         # move cars to store
         guard = Guard.new
         guard.moveToStore
+        # build more cars
         builder.build
         Car.update_all(car_model_id: 1) 
         # validate stock
         stocker = Stocker.new
+        stock_before_validation = StoreStock.all.count
         stocker.send(:validate)
+        stock_after_validation = StoreStock.all.count
 
-        amount_in_store = StoreStock.all.count
-        expect(amount_in_store).to eq(10)
+        cars = Car.all
+        successful_cars = 0
+        expect(stock_before_validation).to eq(stock_after_validation)
     end
     it 'should stock new cars' do
 
@@ -45,14 +49,16 @@ RSpec.describe Stocker, type: :model do
         # move cars to store
         guard = Guard.new
         guard.moveToStore
+        # build more cars
         builder.build
         Car.update_all(car_model_id: 1) 
         # validate stock
         stocker = Stocker.new
+        stock_before_validation = StoreStock.all.count
         stocker.send(:validate)
-        
-        amount_in_store = StoreStock.all.count
-        expect(amount_in_store).to eq(15)
+        stock_after_validation = StoreStock.all.count
+
+        expect(stock_before_validation < stock_after_validation).to eq(true)
     end
   end
   

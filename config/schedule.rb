@@ -34,13 +34,13 @@ every 1.minute do
     rake "robots:buyer"
 end
 
-# every 1.minute do
-#     set :output, {:error => './log/robot-log/changer-error.log', :standard => './log/robot-log/changer.log'}
-#     rake "robots:changer"
-# end
+every 1.minute do
+    set :output, {:error => './log/robot-log/changer-error.log', :standard => './log/robot-log/changer.log'}
+    rake "robots:changer"
+end
 
-# every 1.day, at: '0:00 am' do
-#     set :output, {:error => './log/robot-log/initialize-error.log', :standard => './log/robot-log/initialize.log'}
-#     puts "initialize db"
-#     rake "robots:initialize"
-# end
+every 1.day, at: '0:00 am' do
+    set :output, {:error => './log/robot-log/initialize-error.log', :standard => './log/robot-log/initialize.log'}
+    puts "initialize db"
+    rake "robots:initialize"
+end

@@ -1,3 +1,7 @@
+Initialize robots:
+crontab -r
 rails robots:initialize
-rails server
 whenever --update-crontab --set environment='development'
+
+Run tests
+rails robots:test

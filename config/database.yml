@@ -26,7 +26,7 @@
 test:
   adapter: postgresql
   encoding: unicode
-  database: robot_world
+  database: robot_world_test
   pool: 5
   host: localhost
   port: 5432

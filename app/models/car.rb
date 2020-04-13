@@ -5,7 +5,19 @@ class Car < ApplicationRecord
   has_many :store_stock
 
   # Lo correcto seria que cada auto vaya pasando secuencialmente por una linea de ensable atras de otro 
-
+  def defects
+    success = true
+    defects = []
+    status = JSON.parse self.computer.status
+    status.each do |key, value|
+        if !value
+            defects.push(key)
+            success = false
+        end
+    end
+    return defects
+  end
+  
   def self.createRandomCar
     car = Car.new
 

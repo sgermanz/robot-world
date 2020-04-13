@@ -19,10 +19,15 @@ class Stocker
         end
     end
     def stock(model_id, to_stock)
-        items = WarehouseStock.where(status: WarehouseStock.getNewStatus).where(car_id: Car.select("id").where(car_model_id: model_id)).take(to_stock)
+        items = WarehouseStock.where(status: WarehouseStock.getNewStatus).where(car_id: Car.select("id").where(car_model_id: model_id))
+        count = 0
         items.each do |item|
-            item.update(status: WarehouseStock.getMovedStatus)
-            StoreStock.create(car_id: item.car_id, status: StoreStock.getNewStatus)
+            break if count == to_stock
+            if item.car.defects.length() == 0
+                item.update(status: WarehouseStock.getMovedStatus)
+                StoreStock.create(car_id: item.car_id, status: StoreStock.getNewStatus)
+                count = count + 1
+            end
         end
     end
 end
