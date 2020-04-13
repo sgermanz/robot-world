@@ -36,6 +36,7 @@ RSpec.describe Buyer, type: :model do
         buyer.change
 
         returned_stock = StoreStock.where(status: StoreStock.getReturnedStatus).count
+        puts returned_stock
         changes = OrderChange.all.count
         orders = Order.where(changes_amount:1).count
 

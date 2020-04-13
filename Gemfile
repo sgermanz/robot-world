@@ -50,4 +50,3 @@ gem "pg"
 
 gem 'whenever'
 
-gem 'rspec'

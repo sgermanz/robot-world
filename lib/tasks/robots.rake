@@ -64,11 +64,9 @@ namespace :robots do
   desc "Test"
   task test: :environment do
     puts "Tests " + Time.current.to_s
-    system("pwd")
     system("rails db:drop RAILS_ENV=test")
     system("rails db:create RAILS_ENV=test")
     system("rails db:migrate RAILS_ENV=test")
-    system("rails db:seed RAILS_ENV=test")
     system("rspec")
   end
 end
