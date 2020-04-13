@@ -1,3 +1,4 @@
+require "#{Rails.root}/lib/robots/slack-service"
 class Guard
     def logger
         @@logger ||= Logger.new("#{Rails.root}/log/robots.log")
@@ -7,7 +8,9 @@ class Guard
         if defects.length() == 0 
             logger.info "GUARD: Car buildt succesfully" + " " + car.car_model.name + " " + car.id.to_s
         else 
-            logger.info "GUARD: Car with defects" + " " + car.car_model.name + " " + car.id.to_s
+            message = "GUARD: Car with defects" + " " + car.car_model.name + " " + car.id.to_s + " defects: " +  defects.to_s
+            logger.info message
+            SlackService.sendMessage(message)
         end
     end
     def moveToStore
