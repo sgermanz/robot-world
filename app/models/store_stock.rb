@@ -17,14 +17,14 @@ class StoreStock < ApplicationRecord
 
     def self.getStockByModel
         stock = Hash.new
+        models = CarModel.all
+        models.each do |model|
+            stock[model.id] = 0
+        end
         items = self.where(status: getNewStatus).or(self.where(status: getReturnedStatus))
         items.each do |item|
             model_id = item.car.car_model.id 
-            if stock[model_id].nil?
-                stock[model_id] = 1
-            else
-                stock[model_id] = stock[model_id] + 1 
-            end
+            stock[model_id] = stock[model_id] + 1 
         end
         return stock
     end
