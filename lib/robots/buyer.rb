@@ -1,4 +1,5 @@
 class Buyer
+    @stocker
     def buy
         repeat = (1..10).to_a.sample
         repeat.times do
@@ -10,9 +11,13 @@ class Buyer
                 puts "No more stock"
             end
         end
+        if !@stocker.nil?
+            @stocker.onBuy
+        end
     end
     def change
         order = Order.getRandomOrder
+        item = StoreStock.getRandomItemToBuy
         configuration = JSON.parse StoreConfiguration.all.first.configuration
         maximun_changes = configuration.maximun_changes
         if order.changes_amount < maximun_changes
@@ -20,7 +25,13 @@ class Buyer
             order.update(changes_amount: order.changes_amount + 1)
             order.store_stock.update("status": StoreStock.getReturnedStatus)
         else
-                puts "Used maximun order changes"
+            puts "Used maximun order changes"
         end
+        if !@stocker.nil?
+            @stocker.onBuy 
+        end
+    end
+    def setStocker (stocker)
+        @stocker = stocker
     end
 end

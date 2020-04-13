@@ -25,8 +25,11 @@ namespace :robots do
     schedule = configuration[:buyer_schedule]
     if !schedule.nil? and Time.current.min%schedule==0
       require "#{Rails.root}/lib/robots/buyer"
+      require "#{Rails.root}/lib/robots/stocker"
 
       buyer = Buyer.new
+      stocker = Stocker.new
+      buyer.setStocker(stocker)
       buyer.buy
     end
   end
@@ -36,9 +39,12 @@ namespace :robots do
     configuration = JSON.parse StoreConfiguration.all.first.configuration
     schedule = configuration[:buyer_schedule]
     if !schedule.nil? and Time.current.min%schedule==0
+      require "#{Rails.root}/lib/robots/stocker"
       require "#{Rails.root}/lib/robots/buyer"
 
       buyer = Buyer.new
+      stocker = Stocker.new
+      buyer.setStocker(stocker)
       buyer.change
     end
   end
