@@ -19,9 +19,9 @@ class Buyer
         order = Order.getRandomOrder
         item = StoreStock.getRandomItemToBuy
         configuration = JSON.parse StoreConfiguration.all.first.configuration
-        maximun_changes = configuration.maximun_changes
-        if order.changes_amount < maximun_changes
-            OrderChange.create(order_id: order.id)
+        maximun_changes = configuration["maximun_changes"]
+        if !order.nil? and !item.nil? and order.changes_amount < maximun_changes
+            OrderChange.create(order_id: order.id, store_stock_id: item.id)
             order.update(changes_amount: order.changes_amount + 1)
             order.store_stock.update("status": StoreStock.getReturnedStatus)
         else

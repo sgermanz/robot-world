@@ -1,9 +1,9 @@
 require 'rails_helper'
+require "#{Rails.root}/lib/robots/builder"
+require "#{Rails.root}/lib/robots/guard"
 
 RSpec.describe Guard, type: :model do
     it 'should move 10 cars to store' do
-        require "#{Rails.root}/lib/robots/builder"
-        require "#{Rails.root}/lib/robots/guard"
         
         guard = Guard.new
         builder = Builder.new
