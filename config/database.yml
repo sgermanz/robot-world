@@ -23,7 +23,15 @@
 # production:
 #   <<: *default
 #   database: db/production.sqlite3
-
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: robot_world
+  pool: 5
+  host: localhost
+  port: 5432
+  user: robot
+  password: world
 
 development:
   adapter: postgresql
