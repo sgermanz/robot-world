@@ -37,6 +37,24 @@ $ whenever --update-crontab --set environment='development'
 ```sh
 $ sudo apt-get install libpq-dev
 ```
+### DATABASE:
+Credentials
+```sh
+username: robot
+password: world
+database: robot_world
+```
+Warehouse Stock statuses
+```sh
+new: item that passed all the assembly stages
+moved: item moved to store
+```
+Store Stock statuses
+```sh
+new: item just added on the store stock
+sold: item that is no longer part of any stock and has a related order
+returned: item that came back to the stock store and has a related change order
+```
 
 ### LOGFILE:
 * ./log/robots.log
