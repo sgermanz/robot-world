@@ -35,7 +35,7 @@ every 1.minute do
     rake "robots:changer"
 end
 
-every 1.day, at: '0:00 am' do
-    puts "initialize db"
+every 1.day, at: '21:00 pm' do
+    rake "robots:daily_report"
     rake "robots:initialize"
 end

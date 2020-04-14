@@ -18,6 +18,10 @@ class Car < ApplicationRecord
     return defects
   end
   
+  def revenue
+    return self.car_model.price - self.car_model.cost
+  end
+
   def self.createRandomCar
     car = Car.new
 

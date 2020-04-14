@@ -53,14 +53,21 @@ namespace :robots do
       buyer.change
     end
   end
-  desc "Initialize DB"
+  desc "Initialize"
   task initialize: :environment do
     logger.info "RESET DB: init"
-
+    system("rm log/robots.log")
     system("rails db:drop")
     system("rails db:create")
     system("rails db:migrate")
     system("rails db:seed")
+  end
+
+  desc "Daily Report"
+  task daily_report: :environment do
+    require "#{Rails.root}/lib/robots/report"
+    logger.info "DAILY REPORT: init"
+    Report.dailyReport
   end
   
   desc "Test"
