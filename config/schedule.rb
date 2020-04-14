@@ -23,7 +23,7 @@ every 1.minute do
     rake "robots:builder"
 end
 
-every 2.minute do
+every 30.minute do
     rake "robots:guard"
 end
 
@@ -35,7 +35,7 @@ every 1.minute do
     rake "robots:changer"
 end
 
-every 1.day, at: '23:30 pm' do
+every 1.day, at: '00:00 am' do
     rake "robots:daily_report"
     rake "robots:initialize"
 end

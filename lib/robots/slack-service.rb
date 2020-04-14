@@ -1,6 +1,6 @@
 require 'net/http'
 class SlackService
-    @channel = "https://hooks.slack.com/services/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"
+    @channel = "https://hooks.slack.com/services/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"
     def self.sendMessage(message)
         if !(Rails.env == "test")
             message = {"text": message}
