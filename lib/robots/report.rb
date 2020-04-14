@@ -1,6 +1,9 @@
 require "#{Rails.root}/lib/robots/slack-service"
 
 class Report
+    def self.logger
+        @@logger ||= Logger.new("#{Rails.root}/log/robots.log")
+    end
     def self.dailyReport
         cars_sold = Hash.new
         CarModel.all.each do |model|
@@ -29,7 +32,9 @@ class Report
         cars_sold.each do |key, value|
             message = message +  "Model: " + key + " " + "amount: " + value.to_s + "\n"
         end 
-        
+        message.each_line do |line|
+            self.logger.info line 
+        end
         SlackService.sendMessage(message)
     end
 end

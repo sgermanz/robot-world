@@ -34,12 +34,9 @@ RSpec.describe Buyer, type: :model do
         buyer = Buyer.new
         buyer.buy
         buyer.change
-
         returned_stock = StoreStock.where(status: StoreStock.getReturnedStatus).count
-        puts returned_stock
         changes = OrderChange.all.count
         orders = Order.where(changes_amount:1).count
-
         expect(returned_stock > 0).to eq(true)
         expect(orders > 0).to eq(true)
         expect(changes > 0).to eq(true)
