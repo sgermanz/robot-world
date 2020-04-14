@@ -1,0 +1,2 @@
+class StoreConfiguration < ApplicationRecord
+end
